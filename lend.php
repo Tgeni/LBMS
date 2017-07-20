@@ -70,38 +70,41 @@ $sql = "SELECT c.*, p.* FROM books c, student p WHERE c.book_id = p.book_id AND 
 
 $result = mysqli_query($con, $sql)or die(mysqli_error());
 
-echo "<table align='center' border = 1>";
-echo "<caption style='text-align:center'><b>Category of ".$i."</b></caption>";
-echo "<tr><th style='text-align:center' width='5%'>Class Roll</th><th style='text-align:center' width='5%'>Borrower Name</th><th style='text-align:center' width='5%'>Department</th><th style='text-align:center' width='5%'>Bookname</th><th style='text-align:center' width='5%'>Writer</th><th style='text-align:center' width='5%'>Borrowed Date</th><th style='text-align:center' width='5%'>Bepaid Date</th><th style='text-align:center' width='5%'>Bepaid Remove</th></tr>";
+$numr = mysqli_num_rows($result);
 
-while($row = mysqli_fetch_array($result)) {
-    $roll = $row['roll'];
-    $name = $row['name'];
-    $sdept = $row['sdept'];
-    $bookname = $row['bookname'];
-    $writer = $row['writer'];
-    $sbdate = $row['sbdate'];
-    $rdate = $row['rdate'];
-    $pdate = $rdate;
+  if($numr > 0){
+    echo "<table align='center' border = 1>";
+    echo "<caption style='text-align:center'><b>Category of ".$i."</b></caption>";
+    echo "<tr><th style='text-align:center' width='5%'>Class Roll</th><th style='text-align:center' width='5%'>Borrower Name</th><th style='text-align:center' width='5%'>Department</th><th style='text-align:center' width='5%'>Bookname</th><th style='text-align:center' width='5%'>Writer</th><th style='text-align:center' width='5%'>Borrowed Date</th><th style='text-align:center' width='5%'>Bepaid Date</th><th style='text-align:center' width='5%'>Bepaid Remove</th></tr>";
 
-    echo "<tr>";
-    echo "<td align='center'>".$roll."</td>";
-    echo "<td align='center'>".$name."</td>";
-    echo "<td align='center'>".$sdept."</td>";
-    echo "<td align='center'>".$bookname."</td>";
-    echo "<td align='center'>".$writer."</td>";
-    echo "<td align='center'><font color='blue'>".$sbdate."</font></td>";
-    if($pdate > $rdate){
-       echo "<td align='center'><font color='red'>".$rdate."</font></td>";
-  echo "<td align='center'><a href='delete.php?id=".$row['book_id']."'><font color='red'>Delete</font></a></td>"; }else if($pdate <= $rdate){
-       echo "<td align='center'><font color='green'>".$rdate."</font></td>";
-  echo "<td align='center'><a href='delete1.php?id=".$row['book_id']."'><font color='green'>Delete</font></a></td>";
+    while($row = mysqli_fetch_array($result)) {
+      $roll = $row['roll'];
+      $name = $row['name'];
+      $sdept = $row['sdept'];
+      $bookname = $row['bookname'];
+      $writer = $row['writer'];
+      $sbdate = $row['sbdate'];
+      $rdate = $row['rdate'];
+      $pdate = $rdate;
+
+      echo "<tr>";
+      echo "<td align='center'>".$roll."</td>";
+      echo "<td align='center'>".$name."</td>";
+      echo "<td align='center'>".$sdept."</td>";
+      echo "<td align='center'>".$bookname."</td>";
+      echo "<td align='center'>".$writer."</td>";
+      echo "<td align='center'><font color='blue'>".$sbdate."</font></td>";
+      if($pdate > $rdate){
+        echo "<td align='center'><font color='red'>".$rdate."</font></td>";
+        echo "<td align='center'><a href='delete.php?id=".$row['book_id']."'><font color='red'>Delete</font></a></td>"; }else if($pdate <= $rdate){
+        echo "<td align='center'><font color='green'>".$rdate."</font></td>";
+        echo "<td align='center'><a href='delete1.php?id=".$row['book_id']."'><font color='green'>Delete</font></a></td>";
     }
-  
-}     
-echo "</table><br><br><br />";
+  }
+   echo "</table><br><br><br />";
+   mysqli_free_result($result);
+  }
 }
-
 mysqli_close($con);
 
 ?>
