@@ -68,11 +68,12 @@ $department = array("CSE", "EEE", "ECE", "BBA", "Science fiction", "Action and A
 
  $result = mysqli_query($con,$sql)or die(mysqli_error());
 
-
+$numr = mysqli_num_rows($result);
+  
+  if($numr > 0){
     echo "<table align='center' border = 1>";
     echo "<caption style='text-align:center'><b>Category of ".$i."</b></caption>";
     echo "<tr><th style='text-align:center' width='5%'>Remove Book</th><th style='text-align:center' width='5%'>Book Id</th><th style='text-align:center' width='5%'>Bookname</th><th style='text-align:center' width='5%'>Writer</th><th style='text-align:center' width='5%'>Department</th><th style='text-align:center' width='5%'>Date</th><th style='text-align:center' width='5%'>Get it!!</th></tr>";
-
 
     while($row = mysqli_fetch_array($result)) {
 
@@ -92,8 +93,9 @@ $department = array("CSE", "EEE", "ECE", "BBA", "Science fiction", "Action and A
             echo "</tr>";
     } 
     echo "</table><br><br><br />";
+    mysqli_free_result($result);
+  }
 }
-
 mysqli_close($con);
 ?>
 
