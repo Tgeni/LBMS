@@ -1,2 +1,2 @@
 # LBMS
-library management required any Information 
+Library Management System with required Information 
