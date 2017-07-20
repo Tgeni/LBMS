@@ -94,6 +94,9 @@ $numr = mysqli_num_rows($result);
     } 
     echo "</table><br><br><br />";
     mysqli_free_result($result);
+  }else{
+    echo "<p style='text-align:center'>No Books Inlisted!!!</p>";
+    break;
   }
 }
 mysqli_close($con);
